@@ -1,0 +1,56 @@
+driving-analyzer-final/
+├─ package.json
+├─ package-lock.json
+├─ electron.js
+├─ tailwind.config.js
+├─ postcss.config.js
+├─ README.md                  (선택)
+├─ .gitignore                     (선택)
+│
+├─ public/
+│  ├─ index.html
+│  ├─ favicon.ico                 (선택) → 로고 변경 예정
+│  └─ logo.svg                    (선택) → 로고 변경 예정
+│
+└─ src/
+   ├─ index.js
+   ├─ index.css
+   ├─ reportWebVitals.js
+   ├─ setupTests.js
+   │
+   ├─ App.js
+   ├─ App.css                     디자인(선택: Tailwind 쓰면 최소화 가능)
+   ├─ App.test.js                 (선택)
+   │
+   ├─ engine/                     ★ 핵심 로직 폴더
+   │  ├─ parser.js                   (Step1: CSV 파싱 + normalize)
+   │  ├─ segmenter.js             (Step2: distanceAlongRoad 기반 구간 분리)
+   │  │
+   │  ├─ config/
+   │  │  ├─ fieldMap.js           (CSV 컬럼 별칭 매핑)
+   │  │  ├─ eventsConfig.js     (5개 이벤트 구간 start/end 설정)
+   │  │  └─ thresholds.js         (임계값/컷오프: 나중 단계)
+   │  │
+   │  ├─ indicators/                    (Step4: A~F 지표 계산)
+   │  │  ├─ hazardDetection.js    (A)
+   │  │  ├─ responseTime.js        (B)
+   │  │  ├─ appropriateness.js     (C)
+   │  │  ├─ compliance.js           (D)
+   │  │  ├─ repetition.js             (E)
+   │  │  ├─ awareness.js             (F)
+   │  │  └─ index.js                   (지표 합쳐서 export)
+   │  │
+   │  └─ decision/                  (Step3: 판단 엔진)
+   │     ├─ rules.js                  (Gate/RedFlag 규칙 정의)
+   │     └─ judge.js                 (FIT/CONDITIONAL/UNFIT 최종 판정)
+   │
+   ├─ ui/                         (선택: App.js 비대해지면 분리)
+   │  ├─ UploadPanel.jsx
+   │  ├─ EventSegmentsTable.jsx
+   │  ├─ EventResultsTable.jsx
+   │  ├─ FinalJudgementCard.jsx
+   │  └─ ConfigPanel.jsx          (이벤트 start/end 수정 UI: 나중 단계)
+   │
+   └─ utils/                      (선택)
+      ├─ math.js                  (평균/표준편차 등)
+      └─ format.js                (표시용 포맷)
